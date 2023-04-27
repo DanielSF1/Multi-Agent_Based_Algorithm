@@ -81,12 +81,7 @@ Individuo InicializaIndividuo(int id, int instancias, int n_Acciones){
 	ind.accion.push_back(val);
 	sval+=val;
     }
-/*
-  //Normalizacion...
-    for(int i=0;i<ind.accion.size();i++){
-	ind.accion[i]=(double)ind.accion[i]/sval;
-    }
-*/
+
     //inicializa las variables complementarias...
     ind.tipo=0;
     ind.fitness1=fitness(ind.solucion);
@@ -222,20 +217,6 @@ std::vector<int> completa(std::vector<int> velem){
     return velem;
 }
 
-/*
-std::vector<int> invertir(std::vector<int> lvec, int numero){
-    int indice1=0,indice2=0,val=0;
-    for(int j=0;j<numero;j++){
-	indice1=j;
-	indice2=lvec.size()-j-1;
-	val=lvec[indice1];
-	lvec[indice1]=lvec[indice2];
-	lvec[indice2]=val;
-    }
-    return lvec;
-}
-*/
-
 std::vector<int> combina(std::vector<int> lvec, int numero){
     int indice1=0,indice2=0,val=0;
     for(int j=0;j<numero;j++){
@@ -366,23 +347,6 @@ std::vector<int> vecinos2(std::vector<int> lvec, std::vector<Individuo> poblacio
 	    }
 	}
 
-	/*
-	int numero=contador[0];
-	int indice=0;
-	for(int z=1;z<contador.size();z++){
-	    if(numero<contador[z]){
-		numero=contador[z];
-		indice=z;
-	    }
-	}
-
-	for(int z=0;z<lvec.size();z++){
-	    if(lvec[z]==contador[indice]){
-		lvec[z]=lvec[j];
-		lvec[j]=contador[indice];
-	    }
-	}
-	*/
     }
     
     lvec=completa(lvec);
@@ -525,10 +489,6 @@ std::vector<Individuo> iteracion(std::vector<Individuo> poblacion, std::vector< 
 	}
 
 	else if(iAccion==1){//algoritmo de razonamiento bayesiano...
-	    //lpob[i].solucion=vecinos2(lpob[i].solucion,poblacion,red,i,(rand()%10)+1);
-//	    if(rand()%100<5){
-//		lpob[i].solucion=copia(lpob[i].solucion,poblacion,red,i,rand()%2);
-//	    }
 	    lpob[i].solucion=vecinos2(lpob[i].solucion,poblacion,red,i,(rand()%2)+1);
 	    tAccion1++;
 	}
@@ -668,14 +628,7 @@ int main(int argc, char **argv){
 	//printf(")\n");
 	/**/
 
-	/**/
-//	for(int i=0;i<numeroIndividuos;i++){
-//	    printf("%f ",P.poblacion[i].fitness1);
-//	}
 	P.poblacion=iteracion(P.poblacion,red);
-/**/
-//	printf("\n");
-/**/  
     }
 
     mejor=P.poblacion[0].fitness1;
@@ -686,8 +639,6 @@ int main(int argc, char **argv){
 	    imejor=j;
 	}
     }
-    //    printf("%f\n",mejor);
-    //    printf("%d %d %d %d %d\n",tAccion0,tAccion1,tAccion2,tAccion3,tAccion4);
     
     return 0;
 }
